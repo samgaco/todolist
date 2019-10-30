@@ -1,9 +1,11 @@
-const ToDo = () => {
+const ToDo = (() => {
 
-    const createTodo = (title, description, dueDate, priority, notes, id) => {
-        return{title,description,dueDate,priority,notes, id}
+    const createTodo = (description, status=false) => {
+        return{description, status}
     }
 
    return{createTodo}
 
-}
+})();
+
+export default ToDo
