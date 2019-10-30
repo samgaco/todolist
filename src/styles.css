@@ -3,3 +3,23 @@
 .new-project-form{
   display: none;
 }
+
+.projects{
+  border: 1px solid salmon;
+}
+
+/* Main content */
+.content{
+  border: 1px solid salmon;
+
+}
+/* task list */
+
+.task-list{
+  list-style-type: none;
+  list-style: none;}
+
+.li-task{
+  display: flex;
+  flex-direction: row;
+}
