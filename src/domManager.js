@@ -39,7 +39,7 @@ const domManager = (() => {
     let my_array = JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName)))
     let last_element = my_array[my_array.length - 1];
 
-    renderTask(element);
+    renderTask(last_element);
 
     document.querySelector('#input-task').value = '';
   };
