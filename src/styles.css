@@ -1,16 +1,20 @@
 /* Project Related Styles */
 
-.new-project-form{
+.new-project-form {
   display: none;
 }
 
-.projects{
-  border: 1px solid salmon;
+.projects {
+  height: 3.5rem;
+  padding: 2%;
+  border-radius: 5px 20px;
+  margin: 1%;
+  background: rgb(197, 197, 197, 0.5);
 }
 
 /* Main content */
 
-.todoapp{
+.todoapp {
   width: 50%;
   border: 2px solid salmon;
   border-radius: 10px 20px;
@@ -19,31 +23,59 @@
   top: 20px;
   padding: 1%;
 }
-.content{
-  border: 1px solid salmon;
+.content {
   padding: 2%;
+  border-radius: 10px 20px;
+  margin: 1%;
+  background: rgba(175, 122, 79, 0.5);
 
 }
 
-body{
+body {
   background: url(images/bench.jpg);
   background-size: 90%;
-
 }
 
 /* task list */
 
-.task-list{
+.task-list {
   list-style-type: none;
-  list-style: none;}
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
-.li-task{
+.li-task {
   display: flex;
   flex-direction: row;
 }
 
-.task-row{
-display: flex;
-flex-direction: row;
-border: 1px solid black;
+.task-row {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgb(109, 109, 109);
+  background: rgb(250, 250, 114);
+  min-height: 6rem;
+  max-width: 10rem;
+  margin: 2%;
+  overflow: hidden;
+
+
+}
+
+/* forms */
+
+.textarea {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border: 1px solid rgb(248, 125, 135);
+  outline: none;
+  color: rgb(250, 100, 83);
+  padding: 5px 8px 5px 8px;
+  box-shadow: inset 1px 1px 4px #ffd5e7;
+  -moz-box-shadow: inset 1px 1px 4px #ffd5e7;
+  -webkit-box-shadow: inset 1px 1px 4px #ffd5e7;
+  background: #ffeff6;
+  width: 50%;
 }
