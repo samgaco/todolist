@@ -17,17 +17,24 @@ const domManager = (() => {
         <div class="task-row">
             <i class="fas fa-check-square"></i>
             <p>${element.description}</p>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times delete" data-position=${element.id}></i>
         </div>
         </li>`)
   }
 
   const renderProjectTasks = (projectName) => {
+    console.log(localStorageManager.projectList.getItem(projectName))
 
     if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
       JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
 
         renderTask(element);
+
+        document.querySelector('.delete').addEventListener('click', (evt)  => {
+          localStorageManager.deleteTask('main', evt.target.dataset.position);
+          cleanTasks();
+          renderProjectTasks('main');
+        })
 
       })
     }
@@ -75,9 +82,10 @@ const domManager = (() => {
 
         localStorageManager.addTaskList('main', taskObj)
 
-        renderLastProjectTask('main');
+        renderProjectTasks('main');
       }
     });
+    console.log("Sure");
 
   }
 

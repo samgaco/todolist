@@ -16,12 +16,28 @@ const localStorageManager = (() => {
     }
     counter += 1;
     task.id = counter;
-    let arr = JSON.parse(projectList.getItem('main'))
+    let arr = JSON.parse(projectList.getItem(name))
     arr.push(task)
     projectList.setItem('main', JSON.stringify(arr) )
   };
 
-  return { projectList, addProjects, addTaskList};
+  const deleteTask = (name, id) => {
+    if(projectList.getItem(name) !== null){
+      let arr = JSON.parse(projectList.getItem(name))
+      let i = 0;
+      while(i < arr.length){
+        if(arr[i].id == id){
+          arr.splice(i, 1);
+          break;
+        }
+        i += 1;
+      }
+      projectList.setItem(name, JSON.stringify(arr));
+    }
+
+  }
+
+  return { projectList, addProjects, addTaskList, deleteTask};
 })();
 
 
