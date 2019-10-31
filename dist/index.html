@@ -8,16 +8,18 @@
     <link rel="stylesheet" href="../src/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
     integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-  <body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <body>
 
+      <div class="todoapp">
       <div class="projects">
           <form class="new-project-form">
             <input type="text" name="title" value="" placeholder="title">
             <label for="due-date"></label>
             <input type="text" name="due-date" value="" placeholder="Due Date">
           </form>
-          <input id="newproject-button" type="submit" value="New Project">
-          <input id="clear-button" type="submit" value="Clear">
+          <input id="newproject-button" class="btn btn-danger" type="submit" value="New Project">
+          <input id="clear-button" class="btn btn-danger"type="submit" value="Clear">
         </div>
 
     <div class="content">
@@ -32,7 +34,7 @@
       </form>
 
     </div>
-
+  </div>
 
 
 

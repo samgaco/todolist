@@ -2,41 +2,26 @@ const localStorageManager = (() => {
   let counter = 2;
   let projectList = window.localStorage;
 
-  const initiateMain = () => {
-    let mainList = [
-      {
-        description: "Do a couple of code reviews",
-        status: false,
-        id: 0
-      },
-      {
-        description: "Finish up with the current project",
-        status: false,
-        id: 1
-      },
-      {
-        description: "Work on a bunch of coding challenges",
-        status: false,
-        id: 2
-      }
-    ]
-    projectList.setItem('Main', JSON.stringify(mainList));
-  };
+  if(projectList.length === 0){
+    projectList.setItem('main', JSON.stringify([]))
+  }
 
   const addProjects  =  (name) => {
     projectList.setItem(name, []);
   };
 
   const addTaskList = (name, task) => {
+    if(projectList.length === 0){
+      projectList.setItem('main', JSON.stringify([]))
+    }
     counter += 1;
     task.id = counter;
-    let arr = JSON.parse(projectList[name]);
-    arr.push(task);
-    projectList.setItem(name, JSON.stringify(arr))    
-    return projectList[name];
+    let arr = JSON.parse(projectList.getItem('main'))
+    arr.push(task)
+    projectList.setItem('main', JSON.stringify(arr) )
   };
 
-  return {initiateMain, projectList, addProjects, addTaskList};
+  return { projectList, addProjects, addTaskList};
 })();
 
 

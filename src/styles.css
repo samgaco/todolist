@@ -9,10 +9,28 @@
 }
 
 /* Main content */
+
+.todoapp{
+  width: 50%;
+  border: 2px solid salmon;
+  border-radius: 10px 20px;
+  position: absolute;
+  left: 250px;
+  top: 20px;
+  padding: 1%;
+}
 .content{
   border: 1px solid salmon;
+  padding: 2%;
 
 }
+
+body{
+  background: url(images/bench.jpg);
+  background-size: 90%;
+
+}
+
 /* task list */
 
 .task-list{
