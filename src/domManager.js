@@ -47,8 +47,6 @@ const domManager = (() => {
     let last_element = my_array[my_array.length - 1];
 
     renderTask(last_element);
-
-    document.querySelector('#input-task').value = '';
   };
 
   const cleanTasks = () => {
@@ -82,7 +80,7 @@ const domManager = (() => {
 
         localStorageManager.addTaskList('main', taskObj)
 
-        renderProjectTasks('main');
+        renderLastProjectTask('main');
       }
     });
     console.log("Sure");
