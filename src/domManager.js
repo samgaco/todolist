@@ -15,7 +15,7 @@ const domManager = (() => {
 
     if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null){
     JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
-          
+
           document.querySelector('.task-list').insertAdjacentHTML('beforeend', `
           <li class="li-task">
           <div class="task-row">
@@ -41,7 +41,9 @@ const domManager = (() => {
        <p>${last_element.description}</p>
        <i class="far fa-times-circle"></i>
    </div>
-   </li>` )  };
+   </li>` )
+   document.querySelector('#input-task').value = '';
+ };
 
   const cleanTasks = () =>{
     taskList.innerHTML = ""
@@ -60,23 +62,22 @@ const domManager = (() => {
     clearButton.addEventListener('click', function(){
       cleanTasks();
       localStorageManager.projectList.clear();
-    
+
     }
   );
 
+  document.querySelector('#input-task').addEventListener('keypress', function (e) {
+    var key = e.which || e.keyCode;
+    if (key === 13) {
 
-    document.querySelector('#input-task').addEventListener('keypress', function (e) {
-      var key = e.which || e.keyCode;
-      if (key === 13) { 
+      let taskObj = toDo.createTodo(document.querySelector('#input-task').value);
+      console.log(taskObj)
 
-        let taskObj = toDo.createTodo(document.querySelector('#input-task').value);
-        console.log(taskObj)
+      localStorageManager.addTaskList('main', taskObj)
 
-        localStorageManager.addTaskList('main', taskObj)
-
-        renderLastProjectTask('main');        
-      }
-    })
+      renderLastProjectTask('main');
+    }
+  });
 
   }
 
