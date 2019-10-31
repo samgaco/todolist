@@ -87,6 +87,8 @@ const domManager = (() => {
     });
     console.log("Sure");
 
+    document.querySelector('#input-task').focus();
+
   }
 
 
