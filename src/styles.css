@@ -77,6 +77,9 @@ body {
   text-decoration: none;
 }
 
+.delete{
+  cursor: pointer
+}
 /* forms */
 
 .textarea {

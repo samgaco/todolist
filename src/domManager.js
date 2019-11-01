@@ -32,6 +32,7 @@ const domManager = (() => {
 
         document.querySelector('.delete').addEventListener('click', (evt)  => {
           localStorageManager.deleteTask('main', evt.target.dataset.position);
+          console.log("click on delete")
           cleanTasks();
           renderProjectTasks('main');
         })
@@ -67,6 +68,7 @@ const domManager = (() => {
     clearButton.addEventListener('click', function () {
       cleanTasks();
       localStorageManager.projectList.clear();
+      localStorageManager.resetcounter();
 
     }
     );

@@ -1,5 +1,5 @@
 const localStorageManager = (() => {
-  let counter = 2;
+  var counter = -1;
   let projectList = window.localStorage;
 
   if(projectList.length === 0){
@@ -9,6 +9,10 @@ const localStorageManager = (() => {
   const addProjects  =  (name) => {
     projectList.setItem(name, []);
   };
+
+  const resetcounter = () =>{
+     counter = -1;
+  }
 
   const addTaskList = (name, task) => {
     if(projectList.length === 0){
@@ -37,7 +41,7 @@ const localStorageManager = (() => {
 
   }
 
-  return { projectList, addProjects, addTaskList, deleteTask};
+  return { projectList, addProjects, addTaskList, deleteTask, resetcounter};
 })();
 
 
