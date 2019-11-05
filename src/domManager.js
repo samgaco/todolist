@@ -11,27 +11,49 @@ const domManager = (() => {
   const newTask = document.createElement('li').classList.add('li-task');
   const liTasks = document.querySelector('.li-task')
 
+  const priorityColors = (element) =>{
+    if(element.priority == 1){
+      document.getElementById(`${element.id}`).parentElement.style.background = '#f1ed09'
+        }
+
+    if(element.priority == 2){  
+          document.getElementById(`${element.id}`).parentElement.style.background = '#f15e09'
+            }
+  }
+
   const renderTask = (element) => {
 
     if(element.trash === false){
     document.querySelector('.task-list').insertAdjacentHTML('beforeend', `
         <li class="li-task">
         <div class="task-row">
-            <i class="fas fa-check-square"></i>
-            <p>${element.description}</p>
+        <i class="fas fa-fire-alt priority" id=check${element.id}></i>
+          <p>${element.description}</p>
             <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
         </div>
-        </li>`) }
+        </li>`)      
+
+        priorityColors(element);
+
+      }
   }
 
   const deletebuttonActivate = (id, projectName) => {
 
     if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
     document.getElementById(`${id}`).addEventListener('click', (evt) => {
-      console.log("activate")
-      console.log("see", evt.target.dataset.position)
-
       localStorageManager.deleteTask('main', evt.target.dataset.position);
+      cleanTasks();
+      renderProjectTasks('main');
+    })  };
+  }
+
+
+  const prioritybuttonActivate = (id, projectName) => {
+
+    if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
+    document.getElementById(`check${id}`).addEventListener('click', (evt) => {
+      localStorageManager.CheckTask('main', id);
       cleanTasks();
       renderProjectTasks('main');
     })  };
@@ -43,11 +65,26 @@ const domManager = (() => {
      
       JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
         
-console.log("elements", element.id)
         if(document.getElementById(`${element.id}`) !== null){
-          console.log("entra", element.id)
 
-        deletebuttonActivate(element.id, projectName); }
+        deletebuttonActivate(element.id, projectName); 
+      }
+
+
+      })
+    }
+  };
+
+
+  const renderProjectPriority = (projectName) =>{
+    if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
+     
+      JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
+        
+        if(document.getElementById(`check${element.id}`) !== null){
+
+        prioritybuttonActivate(element.id, projectName); 
+      }
 
 
       })
@@ -62,9 +99,11 @@ console.log("elements", element.id)
       
         renderTask(element);
         renderProjectDelete('main');
+        renderProjectPriority('main');
 
       })
     }
+
   };
 
   const renderLastProjectTask = (projectName) => {
@@ -73,6 +112,8 @@ console.log("elements", element.id)
 
     renderTask(last_element);
     renderProjectDelete('main');
+    renderProjectPriority('main');
+
 
   };
 
@@ -95,7 +136,6 @@ console.log("elements", element.id)
       cleanTasks();
       localStorageManager.projectList.clear();
       localStorageManager.resetcounter();
-
     }
     );
 
@@ -103,8 +143,22 @@ console.log("elements", element.id)
       var key = e.which || e.keyCode;
       if (key === 13) {
 
-        let taskObj = toDo.createTodo(document.querySelector('#input-task').value);
-        console.log(taskObj)
+        let radios = document.getElementsByName('priority');
+
+          for (var i = 0, length = radios.length; i < length; i++)
+          {
+          if (radios[i].checked)
+          {
+            // do whatever you want with the checked radio
+            var priorityValue = radios[i].value;
+
+            // only one radio can be logically checked, don't check the rest
+            break;
+          }
+          }
+
+
+        let taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue);
 
         localStorageManager.addTaskList('main', taskObj)
 
