@@ -1,6 +1,6 @@
 const localStorageManager = (() => {
-  if(typeof(counter)===null){
-     var counter = -1; }
+  
+  var counter = -1; 
 
   let projectList = window.localStorage;
 
@@ -29,11 +29,11 @@ const localStorageManager = (() => {
 
   const deleteTask = (name, id) => {
     if(projectList.getItem(name) !== null){
-      let arr = JSON.parse(projectList.getItem(name))
-      let i = 0;
-      i = arr.findIndex(element => element.id === id)
-      arr.splice(i, 1);
-      projectList.setItem(name, JSON.stringify(arr));
+      let arr = JSON.parse(projectList.getItem(name));
+      console.log("arr", arr)
+      console.log("arr find",arr[id].trash )
+      arr[id].trash = true
+      projectList.setItem(name, JSON.stringify(arr))
     }
   }
 
