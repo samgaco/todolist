@@ -162,6 +162,8 @@ const domManager = (() => {
 
         localStorageManager.addTaskList('main', taskObj)
 
+        document.querySelector('#input-task').value = '';
+
         renderLastProjectTask('main');
       }
     });
