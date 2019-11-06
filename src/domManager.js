@@ -16,7 +16,7 @@ const domManager = (() => {
       document.getElementById(`${element.id}`).parentElement.style.background = '#f1ed09'
         }
 
-    if(element.priority == 2){  
+    if(element.priority == 2){
           document.getElementById(`${element.id}`).parentElement.style.background = '#f15e09'
             }
   }
@@ -31,7 +31,7 @@ const domManager = (() => {
           <p>${element.description}</p>
             <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
         </div>
-        </li>`)      
+        </li>`)
 
         priorityColors(element);
 
@@ -43,7 +43,7 @@ const domManager = (() => {
     if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
     document.getElementById(`${id}`).addEventListener('click', (evt) => {
       localStorageManager.deleteTask('main', evt.target.dataset.position);
-      cleanTasks();
+      cleanTasks();deletebuttonActivate
       renderProjectTasks('main');
     })  };
   }
@@ -58,16 +58,16 @@ const domManager = (() => {
       renderProjectTasks('main');
     })  };
   }
-  
+
 
   const renderProjectDelete = (projectName) =>{
     if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
-     
+
       JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
-        
+
         if(document.getElementById(`${element.id}`) !== null){
 
-        deletebuttonActivate(element.id, projectName); 
+        deletebuttonActivate(element.id, projectName);
       }
 
 
@@ -78,12 +78,12 @@ const domManager = (() => {
 
   const renderProjectPriority = (projectName) =>{
     if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
-     
+
       JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
-        
+
         if(document.getElementById(`check${element.id}`) !== null){
 
-        prioritybuttonActivate(element.id, projectName); 
+        prioritybuttonActivate(element.id, projectName);
       }
 
 
@@ -96,7 +96,7 @@ const domManager = (() => {
 
     if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
       JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
-      
+
         renderTask(element);
         renderProjectDelete('main');
         renderProjectPriority('main');
