@@ -11,7 +11,8 @@ const localStorageManager = (() => {
   };
 
   const addTaskList = (name, task) => {
-    if(projectList.getItem(name) === null || JSON.parse(projectList.getItem(name)).length === 0){
+  console.log("addtasklist beggining: ", JSON.parse(projectList.getItem(name)), "cic" )
+    if(projectList.getItem(name) === null || JSON.parse(projectList.getItem(name)).length == 0){
       projectList.setItem(name, JSON.stringify([]))
       task.id = 0;
       let arr = JSON.parse(projectList.getItem(name))
@@ -67,6 +68,7 @@ const localStorageManager = (() => {
 
     }
   }
+
 
   const allProjects = () => {
     let projects = []

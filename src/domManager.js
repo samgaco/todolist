@@ -12,6 +12,8 @@ const domManager = (() => {
   const newTask = document.createElement('li').classList.add('li-task');
   const liTasks = document.querySelector('.li-task')
 
+  var current_project = 'main'
+
   const priorityColors = (element) =>{
     if(element.priority == 1){
       document.getElementById(`${element.id}`).parentElement.style.background = '#f1ed09'
@@ -42,30 +44,33 @@ const domManager = (() => {
 
   const deletebuttonActivate = (id, projectName) => {
 
-    if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
     document.getElementById(`${id}`).addEventListener('click', (evt) => {
-      localStorageManager.deleteTask('main', evt.target.dataset.position);
+      localStorageManager.deleteTask(projectName, evt.target.dataset.position);
       cleanTasks();
-      renderProjectTasks('main');
+      renderProjectTasks(projectName);
     })  };
   }
 
 
   const prioritybuttonActivate = (id, projectName) => {
 
-    if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
     document.getElementById(`check${id}`).addEventListener('click', (evt) => {
-      localStorageManager.CheckTask('main', id);
+      localStorageManager.CheckTask(projectName, id);
       cleanTasks();
-      renderProjectTasks('main');
+      renderProjectTasks(projectName);
     })  };
   }
 
 
   const renderProjectDelete = (projectName) =>{
-    if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
+    
+    let parsedproject = JSON.parse(localStorageManager.projectList.getItem(projectName))
+    
+    if (parsedproject !== null) {
 
-      JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach(element => {
 
         if(document.getElementById(`${element.id}`) !== null){
 
@@ -79,9 +84,9 @@ const domManager = (() => {
 
 
   const renderProjectPriority = (projectName) =>{
-    if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
 
-      JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach(element => {
 
         if(document.getElementById(`check${element.id}`) !== null){
 
@@ -96,12 +101,12 @@ const domManager = (() => {
   const renderProjectTasks = (projectName) => {
     console.log(localStorageManager.projectList.getItem(projectName))
 
-    if (JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))) !== null) {
-      JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName))).forEach(element => {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach(element => {
 
         renderTask(element);
-        renderProjectDelete('main');
-        renderProjectPriority('main');
+        renderProjectDelete(projectName);
+        renderProjectPriority(projectName);
 
       })
     }
@@ -109,12 +114,12 @@ const domManager = (() => {
   };
 
   const renderLastProjectTask = (projectName) => {
-    let my_array = JSON.parse(localStorageManager.projectList.getItem(localStorageManager.projectList.key(projectName)))
+    let my_array = JSON.parse(localStorageManager.projectList.getItem(projectName))
     let last_element = my_array[my_array.length - 1];
 
     renderTask(last_element);
-    renderProjectDelete('main');
-    renderProjectPriority('main');
+    renderProjectDelete(projectName);
+    renderProjectPriority(projectName);
 
 
   };
@@ -133,6 +138,26 @@ const domManager = (() => {
     })
   }
 
+
+  const activateProjectbuttons = () =>{
+    console.log(document.getElementsByClassName('project'))
+    document.querySelectorAll('.project').forEach(el =>{
+      
+      el.addEventListener('click', function () {
+            current_project = el.textContent;
+            console.log("button project entra", current_project)
+            cleanTasks();
+            renderProjectTasks(current_project);
+            console.log("button project sale")
+
+          
+          }
+      )
+  
+    })
+
+  }
+
   const cleanTasks = () => {
     taskList.innerHTML = ""
   };
@@ -141,8 +166,8 @@ const domManager = (() => {
 
     renderAllProjects();
 
-    renderProjectTasks('main');
-
+    console.log("aqui??")
+    renderProjectTasks(current_project);
 
     newProjectButton.addEventListener('click', function () {
       document.querySelector('.new-project-form').style.display = 'block';
@@ -155,6 +180,10 @@ const domManager = (() => {
       localStorageManager.projectList.clear();
     }
     );
+
+
+    activateProjectbuttons();
+
 
     document.querySelector('#input-task').addEventListener('keypress', function (e) {
       var key = e.which || e.keyCode;
@@ -176,12 +205,13 @@ const domManager = (() => {
         let newDate = new Date(document.getElementById("myDate").value)
 
         let dueDate = newDate.getDate().toString() + '-' +(newDate.getMonth()+1).toString() + '-'+ newDate.getFullYear().toString()
-
+          console.log("creatodo" , document.querySelector('#input-task').value, priorityValue, dueDate)
         let taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue, dueDate);
+          console.log("we insert this into addtasklist  ", taskObj)
+        localStorageManager.addTaskList(current_project, taskObj)
+        
 
-        localStorageManager.addTaskList('main', taskObj)
-
-        renderLastProjectTask('main');
+        renderLastProjectTask(current_project);
       }
     });
 
@@ -189,7 +219,8 @@ const domManager = (() => {
       var key = e.which || e.keyCode;
       if (key === 13) {
         let proj = ProjectsManager.createProject(document.querySelector('.projectTitle').value);
-        localStorageManager.addProjects(proj)
+        // function to create a project in the locat storage
+        localStorageManager.addProjects(proj);
         renderAllProjects();
       }
     });
