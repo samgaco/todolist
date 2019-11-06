@@ -135,7 +135,6 @@ const domManager = (() => {
     clearButton.addEventListener('click', function () {
       cleanTasks();
       localStorageManager.projectList.clear();
-      localStorageManager.resetcounter();
     }
     );
 

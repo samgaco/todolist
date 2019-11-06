@@ -1,7 +1,5 @@
 const localStorageManager = (() => {
   
-  var counter = 0; 
-
   let projectList = window.localStorage;
 
   if(projectList.length === 0){
@@ -11,10 +9,6 @@ const localStorageManager = (() => {
   const addProjects  =  (name) => {
     projectList.setItem(name, []);
   };
-
-  const resetcounter = () =>{
-     counter = 0;
-  }
 
   const addTaskList = (name, task) => {
     if(projectList.length === 0){
@@ -44,8 +38,8 @@ const localStorageManager = (() => {
 
   const CheckTask = (name, id) => {
     if(projectList.getItem(name) !== null){
-      var arr = JSON.parse(projectList.getItem(name));
-    
+      let arr = JSON.parse(projectList.getItem(name));
+      console.log(arr[id])
       switch(arr[id].priority) {
         case 0:
           console.log("dentro1")
@@ -62,12 +56,17 @@ const localStorageManager = (() => {
           arr[id].priority = 0
           projectList.setItem(name, JSON.stringify(arr))
           break;
+        default:
+          console.log("dentro4")
+          arr[id].priority = 2
+          projectList.setItem(name, JSON.stringify(arr))
+
       }
 
     }
   }
 
-  return { projectList, addProjects, addTaskList, deleteTask, CheckTask, resetcounter};
+  return { projectList, addProjects, addTaskList, deleteTask, CheckTask};
 })();
 
 
