@@ -11,7 +11,8 @@ const localStorageManager = (() => {
   };
 
   const addTaskList = (name, task) => {
-    if(projectList.length === 0){
+    if(JSON.parse(projectList.getItem('main')).length === 0){
+      console.log("gets here 1")
       projectList.setItem('main', JSON.stringify([]))
       task.id = 0;
       let arr = JSON.parse(projectList.getItem(name))
@@ -19,7 +20,9 @@ const localStorageManager = (() => {
       projectList.setItem('main', JSON.stringify(arr) )
 
     }else{
+      console.log(projectList[name].length)
       let arr = JSON.parse(projectList.getItem(name))
+      console.log(arr)
       task.id = arr[arr.length-1].id + 1;
       arr.push(task)
       projectList.setItem('main', JSON.stringify(arr) )

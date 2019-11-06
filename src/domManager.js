@@ -28,7 +28,8 @@ const domManager = (() => {
         <li class="li-task">
         <div class="task-row">
         <i class="fas fa-fire-alt priority" id=check${element.id}></i>
-          <p>${element.description}</p>
+          <p>${element.description}</p> <br>
+          <p>${element.duedate} </p>
             <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
         </div>
         </li>`)      
@@ -148,16 +149,18 @@ const domManager = (() => {
           {
           if (radios[i].checked)
           {
-            // do whatever you want with the checked radio
             var priorityValue = radios[i].value;
 
-            // only one radio can be logically checked, don't check the rest
             break;
           }
           }
 
 
-        let taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue);
+        let newDate = new Date(document.getElementById("myDate").value)
+
+        let dueDate = newDate.getDate().toString() + '-' +(newDate.getMonth()+1).toString() + '-'+ newDate.getFullYear().toString()
+
+        let taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue, dueDate);
 
         localStorageManager.addTaskList('main', taskObj)
 
