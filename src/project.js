@@ -1,11 +1,10 @@
-const projects = () => {
+const ProjectsManager = (() => {
 
-    const createProject = (title, duration) => {
-        return{title, duration}
-    }
-
-
-
+  const createProject = (title) => {
+      return title
+  }
    return{createProject}
 
-}
+})();
+
+export default ProjectsManager

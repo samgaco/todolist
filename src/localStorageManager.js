@@ -1,5 +1,5 @@
 const localStorageManager = (() => {
-  
+
   let projectList = window.localStorage;
 
   if(projectList.length === 0){
@@ -11,13 +11,12 @@ const localStorageManager = (() => {
   };
 
   const addTaskList = (name, task) => {
-    if(JSON.parse(projectList.getItem('main')).length === 0){
-      console.log("gets here 1")
-      projectList.setItem('main', JSON.stringify([]))
+    if(projectList.getItem(name) === null || JSON.parse(projectList.getItem(name)).length === 0){
+      projectList.setItem(name, JSON.stringify([]))
       task.id = 0;
       let arr = JSON.parse(projectList.getItem(name))
       arr.push(task)
-      projectList.setItem('main', JSON.stringify(arr) )
+      projectList.setItem(name, JSON.stringify(arr) )
 
     }else{
       console.log(projectList[name].length)
@@ -25,7 +24,7 @@ const localStorageManager = (() => {
       console.log(arr)
       task.id = arr[arr.length-1].id + 1;
       arr.push(task)
-      projectList.setItem('main', JSON.stringify(arr) )
+      projectList.setItem(name, JSON.stringify(arr) )
     }
 
   };
@@ -69,7 +68,17 @@ const localStorageManager = (() => {
     }
   }
 
-  return { projectList, addProjects, addTaskList, deleteTask, CheckTask};
+  const allProjects = () => {
+    let projects = []
+    let i = 0;
+    while (projectList.key(i) !== null){
+      projects.push(projectList.key(i));
+      i += 1;
+    }
+    return projects;
+  }
+
+  return { projectList, addProjects, addTaskList, deleteTask, CheckTask, allProjects};
 })();
 
 
