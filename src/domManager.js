@@ -55,7 +55,6 @@ const domManager = (() => {
   };
 
   const renderProjectTasks = (projectName) => {
-
     if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
       JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
         renderTask(element);
@@ -64,7 +63,6 @@ const domManager = (() => {
         renderProjectEdit(projectName);
       });
     }
-
   };
 
   const deletebuttonActivate = (id, projectName) => {
