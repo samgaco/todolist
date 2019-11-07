@@ -88,13 +88,6 @@ const domManager = (() => {
     }
   };
 
-  document.querySelector('#input-task').addEventListener('keypress', (e) => {
-    const key = e.which || e.keyCode;
-    if (key === 13) {
-
-    }
-  });
-
   const editInputActivate = (id) => {
     document.getElementById(`edit${id}`).addEventListener('keypress', (e) => {
       const key = e.which || e.keyCode;
