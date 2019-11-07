@@ -120,6 +120,11 @@ body {
   overflow-wrap: break-word;
 }
 
+.edit-task{
+
+  display: none;
+}
+
 
 .pagination {
   display: inline-block;

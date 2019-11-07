@@ -32,27 +32,15 @@ const domManager = (() => {
         <div class="task-row">
         <i class="fas fa-fire-alt priority" id=check${element.id}></i>
         <div class="task-inside">
-          <p class="task-description">${element.description}</p> <br>
+          <p id=open-edit${element.id} class="task-description">${element.description}</p> <br>
+          <input id=edit${element.id} class="textarea edit-task" type="text" placeholder="${element.description}"> <br>
           <p class="due-date"> Due date: ${element.duedate} </p>
         </div>
             <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
         </div>
         </li>`)
-
         priorityColors(element);
 
-        document.querySelectorAll('.li-task').forEach(node => {
-          node.addEventListener('click', (evt) => {
-            console.log('Clicked!')
-            document.querySelector('.li-task').classList.add('zoom');
-            document.querySelector('.zoomeffect').classList.add('contzoom');
-          })
-        })
-
-        document.querySelector('.close').addEventListener('click', () => {
-          document.querySelector('.zoom').classList.remove('zoom');
-          document.querySelector('.zoomeffect').classList.remove('contzoom');
-        })
 
       }
   }
@@ -77,6 +65,39 @@ const domManager = (() => {
       renderProjectTasks(projectName);
     })  };
   }
+
+  document.querySelector('#input-task').addEventListener('keypress', function (e) {
+    var key = e.which || e.keyCode;
+    if (key === 13) {
+
+    }
+  });
+
+  const editInputActivate = (id, projectName) =>{
+    document.getElementById(`edit${id}`).addEventListener('keypress', function (e) {
+      var key = e.which || e.keyCode;
+      if (key === 13) {
+        console.log("aqui",document.getElementById(`edit${id}`).value)
+        document.getElementById(`open-edit${id}`).innerHTML = document.getElementById(`edit${id}`).value
+        document.getElementById(`edit${id}`).style.display = "none"
+        document.getElementById(`open-edit${id}`).style.display = "block"
+      }})
+  }
+
+const openeditButtonActivate = (id, projectName) =>{
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+      document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
+        console.log(document.getElementById(`open-edit${id}`))
+        document.getElementById(`open-edit${id}`).style.display = "none"
+        document.getElementById(`edit${id}`).style.display = "block"
+       
+
+        editInputActivate(id, projectName);
+
+     }) }};
+
+
+    
 
 
   const renderProjectDelete = (projectName) =>{
@@ -113,6 +134,22 @@ const domManager = (() => {
     }
   };
 
+
+  const renderProjectEdit = (projectName) =>{
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach(element => {
+
+        if(document.getElementById(`open-edit${element.id}`) !== null){
+
+        openeditButtonActivate(element.id, projectName);
+      }
+
+
+      })
+    }
+  };
+
   const renderProjectTasks = (projectName) => {
     console.log(localStorageManager.projectList.getItem(projectName))
 
@@ -122,6 +159,7 @@ const domManager = (() => {
         renderTask(element);
         renderProjectDelete(projectName);
         renderProjectPriority(projectName);
+        renderProjectEdit(projectName);
 
       })
     }
