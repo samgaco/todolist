@@ -65,9 +65,9 @@ const domManager = (() => {
 
 
   const renderProjectDelete = (projectName) =>{
-    
+
     let parsedproject = JSON.parse(localStorageManager.projectList.getItem(projectName))
-    
+
     if (parsedproject !== null) {
 
       JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach(element => {
@@ -134,6 +134,9 @@ const domManager = (() => {
       let projectEl = document.createElement('div')
       projectEl.classList.add('project')
       projectEl.textContent = el;
+      if(el === 'main'){
+        projectEl.classList.add('currproj');
+      }
       projectsCont.appendChild(projectEl);
     })
   }
@@ -142,18 +145,19 @@ const domManager = (() => {
   const activateProjectbuttons = () =>{
     console.log(document.getElementsByClassName('project'))
     document.querySelectorAll('.project').forEach(el =>{
-      
+
       el.addEventListener('click', function () {
             current_project = el.textContent;
             console.log("button project entra", current_project)
             cleanTasks();
             renderProjectTasks(current_project);
-            console.log("button project sale")
+            document.querySelector('.currproj').classList.remove('currproj')
+            el.classList.add('currproj');
 
-          
+
           }
       )
-  
+
     })
 
   }
@@ -209,7 +213,7 @@ const domManager = (() => {
         let taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue, dueDate);
           console.log("we insert this into addtasklist  ", taskObj)
         localStorageManager.addTaskList(current_project, taskObj)
-        
+
 
         renderLastProjectTask(current_project);
       }

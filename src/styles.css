@@ -14,6 +14,10 @@
   height: 8rem;
 }
 
+.projects .currproj{
+  background-color: blue;
+}
+
 .project{
   background-color: green;
   display: inline-block;

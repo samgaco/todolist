@@ -7,7 +7,7 @@ const localStorageManager = (() => {
   }
 
   const addProjects  =  (name) => {
-    projectList.setItem(name, []);
+    projectList.setItem(name, JSON.stringify([]));
   };
 
   const addTaskList = (name, task) => {
