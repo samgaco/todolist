@@ -30,6 +30,16 @@ const localStorageManager = (() => {
 
   };
 
+  const editTask = (project, id, modifiedtext) => {
+
+    arr = JSON.parse(projectList.getItem(project))
+    arr.find(element=> element.id === id).description = modifiedtext
+    console.log("good?",arr)
+    projectList.setItem(project, JSON.stringify(arr) )
+    
+
+  }
+
   const deleteTask = (name, id) => {
     if(projectList.getItem(name) !== null){
       let arr = JSON.parse(projectList.getItem(name));
@@ -80,7 +90,7 @@ const localStorageManager = (() => {
     return projects;
   }
 
-  return { projectList, addProjects, addTaskList, deleteTask, CheckTask, allProjects};
+  return { projectList, addProjects, addTaskList, editTask,  deleteTask, CheckTask, allProjects};
 })();
 
 

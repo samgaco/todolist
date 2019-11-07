@@ -40,6 +40,7 @@ const domManager = (() => {
         </div>
         </li>`)
         priorityColors(element);
+        openeditButtonActivate(element.id);
 
 
       }
@@ -73,28 +74,31 @@ const domManager = (() => {
     }
   });
 
-  const editInputActivate = (id, projectName) =>{
+  const editInputActivate = (id) =>{
     document.getElementById(`edit${id}`).addEventListener('keypress', function (e) {
       var key = e.which || e.keyCode;
       if (key === 13) {
         console.log("aqui",document.getElementById(`edit${id}`).value)
+        
+        /// edit localstorage not working yet===> (to edit in localstorage)
+        localStorageManager.editTask(current_project, id, document.getElementById(`edit${id}`).value)
+
         document.getElementById(`open-edit${id}`).innerHTML = document.getElementById(`edit${id}`).value
         document.getElementById(`edit${id}`).style.display = "none"
         document.getElementById(`open-edit${id}`).style.display = "block"
       }})
   }
 
-const openeditButtonActivate = (id, projectName) =>{
-    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+const openeditButtonActivate = (id) =>{
       document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
         console.log(document.getElementById(`open-edit${id}`))
         document.getElementById(`open-edit${id}`).style.display = "none"
         document.getElementById(`edit${id}`).style.display = "block"
        
 
-        editInputActivate(id, projectName);
+        editInputActivate(id);
 
-     }) }};
+     }) };
 
 
     
