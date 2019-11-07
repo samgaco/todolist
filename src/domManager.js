@@ -31,8 +31,10 @@ const domManager = (() => {
         <li class="li-task">
         <div class="task-row">
         <i class="fas fa-fire-alt priority" id=check${element.id}></i>
-          <p>${element.description}</p> <br>
-          <p>${element.duedate} </p>
+        <div class="task-inside">
+          <p class="task-description">${element.description}</p> <br>
+          <p class="due-date"> Due date: ${element.duedate} </p>
+        </div>
             <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
         </div>
         </li>`)
@@ -174,15 +176,16 @@ const domManager = (() => {
     console.log("aqui??")
     renderProjectTasks(current_project);
 
-    newProjectButton.addEventListener('click', function () {
-      document.querySelector('.new-project-form').style.display = 'block';
-    }
-    );
+    // newProjectButton.addEventListener('click', function () {
+    //   document.querySelector('.new-project-form').style.display = 'block';
+    // }
+    // );
 
 
     clearButton.addEventListener('click', function () {
       cleanTasks();
       localStorageManager.projectList.clear();
+      renderAllProjects();
     }
     );
 

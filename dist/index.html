@@ -16,8 +16,8 @@
       <div class="todoapp">
 
       <div class="projects">
-          <input type="text" class="projectTitle" name="title" value="" placeholder="title">
-          <input id="newproject-button" class="btn btn-danger" type="submit" value="New Project">
+          <label class="label-todo"  value="New Project">New Project</label>
+          <input type="text" class="textarea projectTitle" name="title" value="" placeholder="title">
           <input id="clear-button" class="btn btn-danger"type="submit" value="Clear"> <br>
 
           <div class="projectContainer">
@@ -34,11 +34,12 @@
 
 
     </div>
+    <label class="label-todo">Send a new task</label> <br>
     <input id="input-task" class="textarea" type="text" placeholder="New task"> <br>
     <input type="radio" name="priority" value="0" checked> Low priority<br>
     <input type="radio" name="priority" value="1"> Standard priority<br>
     <input type="radio" name="priority" value="2"> High priority  <br>
-    <input type="date" id="myDate">
+    <input type="date" class="textarea" id="myDate">
 
 
   </div>
