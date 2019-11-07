@@ -138,6 +138,7 @@ const domManager = (() => {
         projectEl.classList.add('currproj');
       }
       projectsCont.appendChild(projectEl);
+      activateProjectbuttons();
     })
   }
 
