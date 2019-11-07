@@ -1,3 +1,6 @@
+/* eslint-env browser */
+/* eslint no-unused-vars: [1, {"argsIgnorePattern": "evt"}] */
+
 import { type } from 'os';
 import localStorageManager from './localStorageManager';
 import toDo from './task';
