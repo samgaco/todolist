@@ -9,7 +9,7 @@ const domManager = (() => {
   const clearButton = document.querySelector('#clear-button');
   const taskList = document.querySelector('.task-list');
 
-  let current_project = 'main';
+  let currentProject = 'main';
 
   const priorityColors = (element) => {
     if (element.priority === 1) {
@@ -72,7 +72,7 @@ const domManager = (() => {
     document.getElementById(`edit${id}`).addEventListener('keypress', (e) => {
       const key = e.which || e.keyCode;
       if (key === 13) {
-        localStorageManager.editTask(current_project, id, document.getElementById(`edit${id}`).value);
+        localStorageManager.editTask(currentProject, id, document.getElementById(`edit${id}`).value);
 
         document.getElementById(`open-edit${id}`).innerHTML = document.getElementById(`edit${id}`).value;
         document.getElementById(`edit${id}`).style.display = 'none';
@@ -172,10 +172,10 @@ const domManager = (() => {
     console.log(document.getElementsByClassName('project'));
     document.querySelectorAll('.project').forEach((el) => {
       el.addEventListener('click', () => {
-        current_project = el.textContent;
-        console.log('button project entra', current_project);
+        currentProject = el.textContent;
+        console.log('button project entra', currentProject);
         cleanTasks();
-        renderProjectTasks(current_project);
+        renderProjectTasks(currentProject);
         document.querySelector('.currproj').classList.remove('currproj');
         el.classList.add('currproj');
       });
@@ -190,7 +190,7 @@ const domManager = (() => {
     renderAllProjects();
 
     console.log('aqui??');
-    renderProjectTasks(current_project);
+    renderProjectTasks(currentProject);
 
 
     clearButton.addEventListener('click', () => {
@@ -223,10 +223,10 @@ const domManager = (() => {
         console.log('creatodo', document.querySelector('#input-task').value, priorityValue, dueDate);
         const taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue, dueDate);
         console.log('we insert this into addtasklist  ', taskObj);
-        localStorageManager.addTaskList(current_project, taskObj);
+        localStorageManager.addTaskList(currentProject, taskObj);
 
 
-        renderLastProjectTask(current_project);
+        renderLastProjectTask(currentProject);
       }
     });
 
