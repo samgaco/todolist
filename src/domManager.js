@@ -83,7 +83,6 @@ const domManager = (() => {
 
   const openeditButtonActivate = (id) => {
     document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
-      console.log(document.getElementById(`open-edit${id}`));
       document.getElementById(`open-edit${id}`).style.display = 'none';
       document.getElementById(`edit${id}`).style.display = 'block';
 
@@ -128,7 +127,6 @@ const domManager = (() => {
   };
 
   const renderProjectTasks = (projectName) => {
-    console.log(localStorageManager.projectList.getItem(projectName));
 
     if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
       JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
@@ -155,7 +153,6 @@ const domManager = (() => {
       projectsCont.removeChild(projectsCont.firstChild);
     }
     localStorageManager.allProjects().forEach((el) => {
-      console.log(el);
       const projectEl = document.createElement('div');
       projectEl.classList.add('project');
       projectEl.textContent = el;
@@ -169,11 +166,9 @@ const domManager = (() => {
 
 
   const activateProjectbuttons = () => {
-    console.log(document.getElementsByClassName('project'));
     document.querySelectorAll('.project').forEach((el) => {
       el.addEventListener('click', () => {
         currentProject = el.textContent;
-        console.log('button project entra', currentProject);
         cleanTasks();
         renderProjectTasks(currentProject);
         document.querySelector('.currproj').classList.remove('currproj');
@@ -189,7 +184,6 @@ const domManager = (() => {
   const startApp = () => {
     renderAllProjects();
 
-    console.log('aqui??');
     renderProjectTasks(currentProject);
 
 
@@ -220,9 +214,7 @@ const domManager = (() => {
         const newDate = new Date(document.getElementById('myDate').value);
 
         const dueDate = `${newDate.getDate().toString()}-${(newDate.getMonth() + 1).toString()}-${newDate.getFullYear().toString()}`;
-        console.log('creatodo', document.querySelector('#input-task').value, priorityValue, dueDate);
         const taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue, dueDate);
-        console.log('we insert this into addtasklist  ', taskObj);
         localStorageManager.addTaskList(currentProject, taskObj);
 
 
