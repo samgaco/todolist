@@ -32,7 +32,7 @@ const localStorageManager = (() => {
 
   const editTask = (project, id, modifiedtext) => {
 
-    arr = JSON.parse(projectList.getItem(project))
+    let arr = JSON.parse(projectList.getItem(project))
     arr.find(element=> element.id === id).description = modifiedtext
     console.log("good?",arr)
     projectList.setItem(project, JSON.stringify(arr) )
