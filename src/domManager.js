@@ -140,15 +140,28 @@ const domManager = (() => {
         renderProjectEdit(projectName);
       });
     }
+    
   };
 
   const renderLastProjectTask = (projectName) => {
-    const my_array = JSON.parse(localStorageManager.projectList.getItem(projectName));
-    const last_element = my_array[my_array.length - 1];
+    const myArray = JSON.parse(localStorageManager.projectList.getItem(projectName));
+    const lastElement = myArray[myArray.length - 1];
 
-    renderTask(last_element);
+    renderTask(lastElement);
     renderProjectDelete(projectName);
     renderProjectPriority(projectName);
+  };
+
+  const activateProjectbuttons = () => {
+    document.querySelectorAll('.project').forEach((el) => {
+      el.addEventListener('click', () => {
+        currentProject = el.textContent;
+        cleanTasks();
+        renderProjectTasks(currentProject);
+        document.querySelector('.currproj').classList.remove('currproj');
+        el.classList.add('currproj');
+      });
+    });
   };
 
   const renderAllProjects = () => {
@@ -168,18 +181,6 @@ const domManager = (() => {
     });
   };
 
-
-  const activateProjectbuttons = () => {
-    document.querySelectorAll('.project').forEach((el) => {
-      el.addEventListener('click', () => {
-        currentProject = el.textContent;
-        cleanTasks();
-        renderProjectTasks(currentProject);
-        document.querySelector('.currproj').classList.remove('currproj');
-        el.classList.add('currproj');
-      });
-    });
-  };
 
   const startApp = () => {
     renderAllProjects();
