@@ -29,7 +29,7 @@ const localStorageManager = (() => {
 
   const editTask = (project, id, modifiedtext) => {
     const arr = JSON.parse(projectList.getItem(project));
-    arr.find((element) => element.id === id).description = modifiedtext;
+    arr.find(element => element.id === id).description = modifiedtext;
     projectList.setItem(project, JSON.stringify(arr));
   };
 

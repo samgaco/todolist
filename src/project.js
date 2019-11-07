@@ -2,7 +2,7 @@
 /* eslint no-unused-vars: [1, {"argsIgnorePattern": "evt"}] */
 
 const ProjectsManager = (() => {
-  const createProject = (title) => title;
+  const createProject = title => title;
   return { createProject };
 })();
 
