@@ -21,6 +21,16 @@ const domManager = (() => {
     }
   };
 
+  const openeditButtonActivate = (id) => {
+    document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
+      document.getElementById(`open-edit${id}`).style.display = 'none';
+      document.getElementById(`edit${id}`).style.display = 'block';
+
+
+      editInputActivate(id);
+    });
+  };
+
   const renderTask = (element) => {
     if (element.trash === false) {
       document.querySelector('.task-list').insertAdjacentHTML('beforeend', `
@@ -42,6 +52,19 @@ const domManager = (() => {
 
   const cleanTasks = () => {
     taskList.innerHTML = '';
+  };
+
+  const renderProjectTasks = (projectName) => {
+
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
+        renderTask(element);
+        renderProjectDelete(projectName);
+        renderProjectPriority(projectName);
+        renderProjectEdit(projectName);
+      });
+    }
+
   };
 
   const deletebuttonActivate = (id, projectName) => {
@@ -85,16 +108,6 @@ const domManager = (() => {
     });
   };
 
-  const openeditButtonActivate = (id) => {
-    document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
-      document.getElementById(`open-edit${id}`).style.display = 'none';
-      document.getElementById(`edit${id}`).style.display = 'block';
-
-
-      editInputActivate(id);
-    });
-  };
-
 
   const renderProjectDelete = (projectName) => {
     const parsedproject = JSON.parse(localStorageManager.projectList.getItem(projectName));
@@ -128,19 +141,6 @@ const domManager = (() => {
         }
       });
     }
-  };
-
-  const renderProjectTasks = (projectName) => {
-
-    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
-      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
-        renderTask(element);
-        renderProjectDelete(projectName);
-        renderProjectPriority(projectName);
-        renderProjectEdit(projectName);
-      });
-    }
-    
   };
 
   const renderLastProjectTask = (projectName) => {
