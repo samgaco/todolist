@@ -40,6 +40,10 @@ const domManager = (() => {
     }
   };
 
+  const cleanTasks = () => {
+    taskList.innerHTML = '';
+  };
+
   const deletebuttonActivate = (id, projectName) => {
     if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
       document.getElementById(`${id}`).addEventListener('click', (evt) => {
@@ -177,10 +181,6 @@ const domManager = (() => {
     });
   };
 
-  const cleanTasks = () => {
-    taskList.innerHTML = '';
-  };
-
   const startApp = () => {
     renderAllProjects();
 
@@ -198,12 +198,12 @@ const domManager = (() => {
 
 
     document.querySelector('#input-task').addEventListener('keypress', (e) => {
-      let priorityValue = 0
+      let priorityValue = 0;
       const key = e.which || e.keyCode;
       if (key === 13) {
         const radios = document.getElementsByName('priority');
 
-        for (let i = 0, { length } = radios; i < length; i+=1) {
+        for (let i = 0, { length } = radios; i < length; i += 1) {
           if (radios[i].checked) {
             priorityValue = radios[i].value;
 
