@@ -1,28 +1,22 @@
 /* eslint-env browser */
 /* eslint no-unused-vars: [1, {"argsIgnorePattern": "evt"}] */
 
-import { type } from 'os';
 import localStorageManager from './localStorageManager';
 import toDo from './task';
 import ProjectsManager from './project';
 
 const domManager = (() => {
-  const content = document.querySelector('.content');
-  const newProjectButton = document.querySelector('#newproject-button');
   const clearButton = document.querySelector('#clear-button');
   const taskList = document.querySelector('.task-list');
-  const newProjectIcon = document.createElement('button');
-  const newTask = document.createElement('li').classList.add('li-task');
-  const liTasks = document.querySelector('.li-task');
 
   let current_project = 'main';
 
   const priorityColors = (element) => {
-    if (element.priority == 1) {
+    if (element.priority === 1) {
       document.getElementById(`${element.id}`).parentElement.style.background = '#f1ed09';
     }
 
-    if (element.priority == 2) {
+    if (element.priority === 2) {
       document.getElementById(`${element.id}`).parentElement.style.background = '#f15e09';
     }
   };
