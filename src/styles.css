@@ -14,11 +14,11 @@
   height: 8rem;
 }
 
-.projects .currproj{
+.projects .currproj {
   background: #5d886c;
 }
 
-.project{
+.project {
   background-color: green;
   display: inline-block;
   color: #fff;
@@ -47,32 +47,28 @@
   cursor: pointer;
 }
 
-body .contzoom{
+body .contzoom {
   display: block;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5)
-    );
-    z-index: 10;
-    min-width: 60%;
-    min-height: 60vh;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    margin: 0;
-    overflow-y: hidden;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  z-index: 10;
+  min-width: 60%;
+  min-height: 60vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  margin: 0;
+  overflow-y: hidden;
 }
 .content {
   padding: 2%;
   border-radius: 10px 20px;
   margin: 1%;
   background: rgba(175, 122, 79, 0.5);
-
 }
 
-html{
+html {
   position: relative;
 }
 body {
@@ -85,11 +81,11 @@ body {
 
 /* Projects */
 
-.project:hover{
+.project:hover {
   background: #5d886c;
 }
 
-.project{
+.project {
   cursor: pointer;
 }
 /* task list */
@@ -114,17 +110,15 @@ body {
   min-height: 6rem;
   max-width: 10rem;
   margin: 2%;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
   font-size: 1.5rem;
   padding: 2%;
   overflow-wrap: break-word;
 }
 
-.edit-task{
-
+.edit-task {
   display: none;
 }
-
 
 .pagination {
   display: inline-block;
@@ -137,39 +131,37 @@ body {
   text-decoration: none;
 }
 
-.delete{
-  cursor: pointer
+.delete {
+  cursor: pointer;
 }
 
-.delete:hover{
+.delete:hover {
   color: whitesmoke;
 }
 
-.priority{
-  cursor: pointer
-
+.priority {
+  cursor: pointer;
 }
 
-.priority:hover{
+.priority:hover {
   color: rgb(219, 102, 35);
 }
 
-.task-inside{
-
+.task-inside {
   display: flex;
   flex-direction: column;
 }
 
-.due-date{
+.due-date {
   font-size: 0.8rem;
 }
 
-.task-description{
+.task-description {
   margin-top: 30%;
   font-size: 1.2rem;
 }
 
-.label-todo{
+.label-todo {
   font-weight: bold;
   color: crimson;
 }
@@ -200,7 +192,7 @@ body {
   width: 50%;
 }
 
-.radiocont{
+.radiocont {
   width: 2em;
   height: 2em;
   border-radius: 50%;
@@ -208,18 +200,18 @@ body {
   display: inline-block;
 }
 
-.lp{
+.lp {
   background: #5ef109;
 }
 
-.sp{
+.sp {
   background: rgb(241, 237, 9);
 }
-.hp{
+.hp {
   background: rgb(241, 94, 9);
 }
 
-.radiocont input{
+.radiocont input {
   height: 2em;
   line-height: 2em;
 }

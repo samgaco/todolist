@@ -1,10 +1,6 @@
 const ProjectsManager = (() => {
-
-  const createProject = (title) => {
-      return title
-  }
-   return{createProject}
-
+  const createProject = (title) => title;
+  return { createProject };
 })();
 
-export default ProjectsManager
+export default ProjectsManager;
