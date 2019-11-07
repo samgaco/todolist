@@ -16,11 +16,11 @@ const domManager = (() => {
 
   const priorityColors = (element) =>{
     if(element.priority == 1){
-      document.getElementById(`${element.id}`).parentElement.style.background = '#f1ed09'
+      document.getElementById(`${element.id}`).parentElement.parentElement.style.background = '#f1ed09'
         }
 
     if(element.priority == 2){
-          document.getElementById(`${element.id}`).parentElement.style.background = '#f15e09'
+          document.getElementById(`${element.id}`).parentElement.parentElement.style.background = '#f15e09'
             }
   }
 
@@ -30,27 +30,52 @@ const domManager = (() => {
     document.querySelector('.task-list').insertAdjacentHTML('beforeend', `
         <li class="li-task">
         <div class="task-row">
+        <div class="overlay">
+        </div>
+        <div class="taskscontent">
+        <i class="fas fa-arrows-alt zoom-icon"></i>
         <i class="fas fa-fire-alt priority" id=check${element.id}></i>
+        <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
         <div class="task-inside">
           <p class="task-description">${element.description}</p> <br>
           <p class="due-date"> Due date: ${element.duedate} </p>
         </div>
-            <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
+        </div>
         </div>
         </li>`)
 
         priorityColors(element);
 
-        document.querySelectorAll('.li-task').forEach(node => {
-          node.addEventListener('click', (evt) => {
-            console.log('Clicked!')
-            document.querySelector('.li-task').classList.add('zoom');
-            document.querySelector('.zoomeffect').classList.add('contzoom');
-          })
+        document.querySelectorAll('.taskscontent').forEach(node => {
+          node.addEventListener('mouseenter', (evt) => {
+            console.log('Mouse Over!!')
+            evt.target.classList.add('zoom1');
+            let overlay = evt.target.parentElement.children[0];
+            overlay.style.display = 'block';
+            overlay.parentElement.children[1].children[0].style.display = 'block';
+        });
+        let oldIcon = node.children[0];
+        let newIcon = oldIcon.cloneNode(true);
+        console.log(node.children[0])
+        node.replaceChild(newIcon, oldIcon);
+        newIcon.addEventListener('click', (evt) => {
+          console.log('Clicked!')
+          evt.target.parentElement.parentElement.classList.add('zoom');
+          document.querySelector('.zoomeffect').classList.add('contzoom');
+        })
+        node.addEventListener('mouseleave', (evt) => {
+          console.log('Mouse Leave!!')
+          evt.target.classList.remove('zoom1');
+          evt.target.parentElement.children[0].style.display = 'none';
+          let overlay = evt.target.parentElement.children[0];
+          overlay.parentElement.children[1].children[0].style.display = 'none';
+      });
         })
 
         document.querySelector('.close').addEventListener('click', () => {
-          document.querySelector('.zoom').classList.remove('zoom');
+          if(document.querySelector('.zoom') !== null){
+            document.querySelector('.zoom').classList.remove('zoom');
+          }
           document.querySelector('.zoomeffect').classList.remove('contzoom');
         })
 
