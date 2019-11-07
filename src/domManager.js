@@ -41,6 +41,19 @@ const domManager = (() => {
 
         priorityColors(element);
 
+        document.querySelectorAll('.li-task').forEach(node => {
+          node.addEventListener('click', (evt) => {
+            console.log('Clicked!')
+            document.querySelector('.li-task').classList.add('zoom');
+            document.querySelector('.zoomeffect').classList.add('contzoom');
+          })
+        })
+
+        document.querySelector('.close').addEventListener('click', () => {
+          document.querySelector('.zoom').classList.remove('zoom');
+          document.querySelector('.zoomeffect').classList.remove('contzoom');
+        })
+
       }
   }
 
@@ -175,11 +188,6 @@ const domManager = (() => {
 
     console.log("aqui??")
     renderProjectTasks(current_project);
-
-    // newProjectButton.addEventListener('click', function () {
-    //   document.querySelector('.new-project-form').style.display = 'block';
-    // }
-    // );
 
 
     clearButton.addEventListener('click', function () {
