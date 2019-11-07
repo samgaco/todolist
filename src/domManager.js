@@ -198,13 +198,14 @@ const domManager = (() => {
 
 
     document.querySelector('#input-task').addEventListener('keypress', (e) => {
+      var priorityValue = 0
       const key = e.which || e.keyCode;
       if (key === 13) {
         const radios = document.getElementsByName('priority');
 
         for (let i = 0, { length } = radios; i < length; i++) {
           if (radios[i].checked) {
-            var priorityValue = radios[i].value;
+             priorityValue = radios[i].value;
 
             break;
           }
