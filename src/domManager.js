@@ -216,6 +216,31 @@ const domManager = (() => {
       }
     });
 
+    document.querySelector('#sendtaskbutton').addEventListener('click', (e) => {
+      let priorityValue = 0;
+
+        const radios = document.getElementsByName('priority');
+
+        for (let i = 0, { length } = radios; i < length; i += 1) {
+          if (radios[i].checked) {
+            priorityValue = radios[i].value;
+
+            break;
+          }
+        }
+
+
+        const newDate = new Date(document.getElementById('myDate').value);
+
+        const dueDate = `${newDate.getDate().toString()}-${(newDate.getMonth() + 1).toString()}-${newDate.getFullYear().toString()}`;
+        const taskObj = toDo.createTodo(document.querySelector('#title-task').value, document.querySelector('#input-task').value, priorityValue, dueDate);
+        localStorageManager.addTaskList(currentProject, taskObj);
+
+
+        renderLastProjectTask(currentProject);
+      
+    });
+
     document.querySelector('.projectTitle').addEventListener('keypress', (e) => {
       const key = e.which || e.keyCode;
       if (key === 13) {
@@ -225,6 +250,16 @@ const domManager = (() => {
         renderAllProjects();
       }
     });
+
+    document.querySelector('.projectsubmit').addEventListener('click', (e) => {
+
+        const proj = ProjectsManager.createProject(document.querySelector('.projectTitle').value);
+        // function to create a project in the locat storage
+        localStorageManager.addProjects(proj);
+        renderAllProjects();
+    
+    });
+
 
     document.querySelector('#input-task').focus();
   };

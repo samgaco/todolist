@@ -36,7 +36,6 @@
       </div>
 
       <div class="projects">
-        <label class="label-todo" value="New Project">New Project</label>
         <input
           type="text"
           class="textarea projectTitle"
@@ -44,6 +43,7 @@
           value=""
           placeholder="title"
         />
+        <button class="btn btn-danger label-todo projectsubmit" value="New Project">New Project</button>
         <input
           id="clear-button"
           class="btn btn-danger"
@@ -58,7 +58,7 @@
       <div class="content">
         <ul class="task-list"></ul>
       </div>
-      <label class="label-todo">Send a new task</label> <br />
+      <button id="sendtaskbutton" class="btn btn-danger label-todo">Send a new task</button> <br />
       <input
       id="title-task"
       class="textarea"
