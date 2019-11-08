@@ -21,15 +21,28 @@ const domManager = (() => {
     }
   };
 
+  const editInputActivate = (id) => {
+    document.getElementById(`edit${id}`).addEventListener('keypress', (e) => {
+      const key = e.which || e.keyCode;
+      if (key === 13) {
+        localStorageManager.editTask(currentProject, id, document.getElementById(`edit${id}`).value);
+
+        document.getElementById(`open-edit${id}`).innerHTML = document.getElementById(`edit${id}`).value;
+        document.getElementById(`edit${id}`).style.display = 'none';
+        document.getElementById(`open-edit${id}`).style.display = 'block';
+      }
+    });
+  };
+
+
   const openeditButtonActivate = (id) => {
     document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
       document.getElementById(`open-edit${id}`).style.display = 'none';
       document.getElementById(`edit${id}`).style.display = 'block';
-
-
       editInputActivate(id);
     });
   };
+
 
   const renderTask = (element) => {
     if (element.trash === false) {
@@ -55,6 +68,36 @@ const domManager = (() => {
     taskList.innerHTML = '';
   };
 
+  const renderProjectEdit = (projectName) => {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
+        if (document.getElementById(`open-edit${element.id}`) !== null) {
+          openeditButtonActivate(element.id, projectName);
+        }
+      });
+    }
+  };
+
+  const prioritybuttonActivate = (id, projectName) => {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+      document.getElementById(`check${id}`).addEventListener('click', (evt) => {
+        localStorageManager.CheckTask(projectName, id);
+        cleanTasks();
+        renderProjectTasks(projectName);
+      });
+    }
+  };
+
+  const renderProjectPriority = (projectName) => {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
+        if (document.getElementById(`check${element.id}`) !== null) {
+          prioritybuttonActivate(element.id, projectName);
+        }
+      });
+    }
+  };
+
   const renderProjectTasks = (projectName) => {
     if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
       JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
@@ -77,30 +120,6 @@ const domManager = (() => {
   };
 
 
-  const prioritybuttonActivate = (id, projectName) => {
-    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
-      document.getElementById(`check${id}`).addEventListener('click', (evt) => {
-        localStorageManager.CheckTask(projectName, id);
-        cleanTasks();
-        renderProjectTasks(projectName);
-      });
-    }
-  };
-
-  const editInputActivate = (id) => {
-    document.getElementById(`edit${id}`).addEventListener('keypress', (e) => {
-      const key = e.which || e.keyCode;
-      if (key === 13) {
-        localStorageManager.editTask(currentProject, id, document.getElementById(`edit${id}`).value);
-
-        document.getElementById(`open-edit${id}`).innerHTML = document.getElementById(`edit${id}`).value;
-        document.getElementById(`edit${id}`).style.display = 'none';
-        document.getElementById(`open-edit${id}`).style.display = 'block';
-      }
-    });
-  };
-
-
   const renderProjectDelete = (projectName) => {
     const parsedproject = JSON.parse(localStorageManager.projectList.getItem(projectName));
 
@@ -108,28 +127,6 @@ const domManager = (() => {
       JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
         if (document.getElementById(`${element.id}`) !== null) {
           deletebuttonActivate(element.id, projectName);
-        }
-      });
-    }
-  };
-
-
-  const renderProjectPriority = (projectName) => {
-    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
-      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
-        if (document.getElementById(`check${element.id}`) !== null) {
-          prioritybuttonActivate(element.id, projectName);
-        }
-      });
-    }
-  };
-
-
-  const renderProjectEdit = (projectName) => {
-    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
-      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
-        if (document.getElementById(`open-edit${element.id}`) !== null) {
-          openeditButtonActivate(element.id, projectName);
         }
       });
     }
@@ -216,29 +213,28 @@ const domManager = (() => {
       }
     });
 
-    document.querySelector('#sendtaskbutton').addEventListener('click', (e) => {
+    document.querySelector('#sendtaskbutton').addEventListener('click', () => {
       let priorityValue = 0;
 
-        const radios = document.getElementsByName('priority');
+      const radios = document.getElementsByName('priority');
 
-        for (let i = 0, { length } = radios; i < length; i += 1) {
-          if (radios[i].checked) {
-            priorityValue = radios[i].value;
+      for (let i = 0, { length } = radios; i < length; i += 1) {
+        if (radios[i].checked) {
+          priorityValue = radios[i].value;
 
-            break;
-          }
+          break;
         }
+      }
 
 
-        const newDate = new Date(document.getElementById('myDate').value);
+      const newDate = new Date(document.getElementById('myDate').value);
 
-        const dueDate = `${newDate.getDate().toString()}-${(newDate.getMonth() + 1).toString()}-${newDate.getFullYear().toString()}`;
-        const taskObj = toDo.createTodo(document.querySelector('#title-task').value, document.querySelector('#input-task').value, priorityValue, dueDate);
-        localStorageManager.addTaskList(currentProject, taskObj);
+      const dueDate = `${newDate.getDate().toString()}-${(newDate.getMonth() + 1).toString()}-${newDate.getFullYear().toString()}`;
+      const taskObj = toDo.createTodo(document.querySelector('#title-task').value, document.querySelector('#input-task').value, priorityValue, dueDate);
+      localStorageManager.addTaskList(currentProject, taskObj);
 
 
-        renderLastProjectTask(currentProject);
-      
+      renderLastProjectTask(currentProject);
     });
 
     document.querySelector('.projectTitle').addEventListener('keypress', (e) => {
@@ -251,13 +247,11 @@ const domManager = (() => {
       }
     });
 
-    document.querySelector('.projectsubmit').addEventListener('click', (e) => {
-
-        const proj = ProjectsManager.createProject(document.querySelector('.projectTitle').value);
-        // function to create a project in the locat storage
-        localStorageManager.addProjects(proj);
-        renderAllProjects();
-    
+    document.querySelector('.projectsubmit').addEventListener('click', () => {
+      const proj = ProjectsManager.createProject(document.querySelector('.projectTitle').value);
+      // function to create a project in the locat storage
+      localStorageManager.addProjects(proj);
+      renderAllProjects();
     });
 
 
