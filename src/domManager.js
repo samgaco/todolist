@@ -47,6 +47,21 @@ const domManager = (() => {
     });
   };
 
+  const editDateActivate = (id) => {
+    document.querySelector(`#edit‐date${id}`).addEventListener('keypress', (e) => {
+      const key = e.which || e.keyCode;
+      if (key === 13) {
+        const newDate = new Date(document.querySelector(`#edit‐date${id}`).value);
+
+        const dueDate = `${newDate.getDate().toString()}-${(newDate.getMonth() + 1).toString()}-${newDate.getFullYear().toString()}`;
+        localStorageManager.editDate(currentProject, id, dueDate);
+
+        document.querySelector(`#date${id}`).textContent = dueDate;
+        document.querySelector(`#edit‐date${id}`).style.display = 'none';
+        document.querySelector(`#date${id}`).style.display = 'block';
+      }
+    });
+  }
 
   const openeditButtonActivate = (id) => {
     document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
@@ -64,6 +79,14 @@ const domManager = (() => {
     });
   };
 
+  const openedDateActivate = (id) => {
+    document.querySelector(`#date${id}`).addEventListener('click', () => {
+      document.querySelector(`#date${id}`).style.display = 'none';
+      document.querySelector(`#edit‐date${id}`).style.display = 'block';
+      editDateActivate(id);
+    });
+  }
+
 
   const renderTask = (element) => {
     if (element.trash === false) {
@@ -76,7 +99,8 @@ const domManager = (() => {
          <input id=edit-title${element.id} class="textarea edit-task" type="text" placeholder="${element.title}"> <br>
           <p id=open-edit${element.id} class="task-description">${element.description}</p> <br>
           <input id=edit${element.id} class="textarea edit-task" type="text" placeholder="${element.description}"> <br>
-          <p class="due-date"> Due date: ${element.duedate} </p>
+          <p id=date${element.id} class="due-date"> Due date: ${element.duedate} </p>
+          <input id=edit‐date${element.id} class="due-date edit‐date" type="date" class="textarea" id="myDate" />
         </div>
             <i class="fas fa-times delete" id=${element.id} data-position=${element.id}></i>
         </div>
@@ -84,6 +108,7 @@ const domManager = (() => {
       priorityColors(element);
       openeditButtonActivate(element.id);
       openeditTitleActivate(element.id);
+      openedDateActivate(element.id);
     }
   };
 

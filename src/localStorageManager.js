@@ -39,6 +39,12 @@ const localStorageManager = (() => {
     projectList.setItem(project, JSON.stringify(arr));
   };
 
+  const editDate = (project, id, date) => {
+    const arr = JSON.parse(projectList.getItem(project));
+    arr.find(element => element.id === id).duedate = date;
+    projectList.setItem(project, JSON.stringify(arr));
+  };
+
   const deleteTask = (name, id) => {
     if (projectList.getItem(name) !== null) {
       const arr = JSON.parse(projectList.getItem(name));
@@ -84,6 +90,7 @@ const localStorageManager = (() => {
 
   return {
     projectList, addProjects, addTaskList, editTask, editTitle, deleteTask, CheckTask, allProjects, editTitle,
+    editDate,
     };
 })();
 
