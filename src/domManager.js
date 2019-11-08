@@ -9,7 +9,7 @@ const domManager = (() => {
   const clearButton = document.querySelector('#clear-button');
   const taskList = document.querySelector('.task-list');
 
-  let currentProject = 'main';
+  let currentProject = 'default';
 
   const priorityColors = (element) => {
     if (element.priority === 1) {
