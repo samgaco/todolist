@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <a href="https://raw.githack.com/samgaco/todolist/editworking/dist/index.html">
+  <a href="https://rawcdn.githack.com/samgaco/todolist/4c009a1851daeb5401494aabbd50beccec54308f/dist/index.html">
     <img src="src/images/logo.png" alt="Logo">
   </a>
 
@@ -10,7 +10,7 @@
     JavaScript Project
     <br />
     <br />
-    <a href="https://raw.githack.com/samgaco/todolist/editworking/dist/index.html">View Demo</a>
+    <a href="https://rawcdn.githack.com/samgaco/todolist/4c009a1851daeb5401494aabbd50beccec54308f/dist/index.html">View Demo</a>
     ·
     <a href="https://github.com/samgaco/todolist/issues">Report Bug</a>
     ·
