@@ -61,7 +61,7 @@ const domManager = (() => {
         document.querySelector(`#date${id}`).style.display = 'block';
       }
     });
-  }
+  };
 
   const openeditButtonActivate = (id) => {
     document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
@@ -85,7 +85,7 @@ const domManager = (() => {
       document.querySelector(`#edit‐date${id}`).style.display = 'block';
       editDateActivate(id);
     });
-  }
+  };
 
 
   const renderTask = (element) => {
@@ -196,7 +196,7 @@ const domManager = (() => {
         currentProject = el.textContent;
         cleanTasks();
         renderProjectTasks(currentProject);
-        document.querySelector('.current‐project').classList.remove('current‐project')
+        document.querySelector('.current‐project').classList.remove('current‐project');
         el.classList.add('current‐project');
       });
     });
@@ -214,7 +214,7 @@ const domManager = (() => {
       if (el === 'default') {
         projectEl.classList.add('currproj');
       }
-      if(el === currentProject){
+      if (el === currentProject) {
         projectEl.classList.add('current‐project');
       }
       projectsCont.appendChild(projectEl);
