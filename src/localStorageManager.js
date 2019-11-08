@@ -83,7 +83,7 @@ const localStorageManager = (() => {
   };
 
   return {
-    projectList, addProjects, addTaskList, editTitle, deleteTask, CheckTask, allProjects, editTitle,
+    projectList, addProjects, addTaskList, editTask, editTitle, deleteTask, CheckTask, allProjects, editTitle,
     };
 })();
 
