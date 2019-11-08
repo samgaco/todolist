@@ -1,0 +1,251 @@
+/* Project Related Styles */
+
+.new-project-form {
+  display: none;
+}
+
+.projects {
+  height: 3.5rem;
+  padding: 2%;
+  border-radius: 5px 20px;
+  margin: 1%;
+  background: rgb(197, 197, 197, 0.5);
+  max-height: 100%;
+  height: 8rem;
+}
+
+.projectContainer .current‐project{
+  opacity: 0.7;
+}
+
+.project {
+  background-color: crimson;
+  display: inline-block;
+  color: #fff;
+  padding: 10px;
+  margin: 1%;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-bottom-right-radius: 7px;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-bottomright: 7px;
+  -moz-border-radius-bottomleft: 6px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 6px;
+}
+
+/* Main content */
+
+.todoapp {
+  width: 50%;
+  border: 2px solid salmon;
+  border-radius: 10px 20px;
+  margin: 0 auto;
+  margin-top: 10vh;
+  padding: 1%;
+}
+
+.zoomeffect {
+  display: none;
+}
+
+.zoomeffect i {
+  float: right;
+  font-size: 3em;
+  color: #fff;
+  cursor: pointer;
+}
+
+body .contzoom {
+  display: block;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  z-index: 10;
+  min-width: 60%;
+  min-height: 60vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  margin: 0;
+  overflow-y: hidden;
+}
+.content {
+  padding: 2%;
+  border-radius: 10px 20px;
+  margin: 1%;
+  background: rgba(175, 122, 79, 0.5);
+}
+
+html {
+  position: relative;
+}
+body {
+  background: url(images/bench.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Projects */
+
+.project:hover {
+  background: rgb(253, 169, 186);
+}
+
+.project {
+  cursor: pointer;
+}
+/* task list */
+
+.task-list {
+  list-style-type: none;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.li-task {
+  display: flex;
+  flex-direction: row;
+}
+
+.task-row {
+  margin: 2%;
+  display: flex;
+  flex-direction: row;
+  min-height: 6rem;
+  max-width: 10rem;
+  line-height: 1;
+  text-align:center;
+  border:1px solid #E8E8E8;
+  border-top:60px solid #fdfd86;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  border: 1px solid rgb(109, 109, 109);
+  border-bottom-right-radius: 60px 5px;
+  background: #5ef109;
+
+
+}
+
+.task-title {
+  margin-top: 2em;
+}
+
+.edit-task {
+  display: none;
+}
+
+.edit‐date {
+  display: none;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination li {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: whitesmoke;
+}
+
+.priority {
+  cursor: pointer;
+}
+
+.priority:hover {
+  color: rgb(219, 102, 35);
+}
+
+.task-inside {
+  display: flex;
+  flex-direction: column;
+  display: inline-block;
+  word-break: break-all;
+}
+
+.due-date {
+  font-size: 0.8rem;
+}
+
+.task-description {
+  font-size: 1.2rem;
+}
+
+.label-todo {
+  font-weight: bold;
+  color: crimson;
+}
+
+.task-list .zoom {
+  position: absolute;
+  max-width: 10rem;
+  transform: scale(1.7);
+  transition: transform 0.4s;
+  right: 50%;
+  bottom: 50%;
+  z-index: 20;
+}
+/* forms */
+
+.textarea {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border: 1px solid rgb(248, 125, 135);
+  outline: none;
+  color: rgb(250, 100, 83);
+  padding: 5px 8px 5px 8px;
+  box-shadow: inset 1px 1px 4px #ffd5e7;
+  -moz-box-shadow: inset 1px 1px 4px #ffd5e7;
+  -webkit-box-shadow: inset 1px 1px 4px #ffd5e7;
+  background: #ffeff6;
+  width: 50%;
+}
+
+.radiocont {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-align: center;
+  display: inline-block;
+}
+
+.lp {
+  background: #5ef109;
+}
+
+.sp {
+  background: rgb(241, 237, 9);
+}
+.hp {
+  background: rgb(241, 94, 9);
+}
+
+.radiocont input {
+  height: 2em;
+  line-height: 2em;
+}
+
+.radiocont + p {
+  height: 2em;
+  line-height: 2em;
+  display: inline-block;
+  padding-bottom: 1em;
+}
