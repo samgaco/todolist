@@ -9,7 +9,7 @@ const domManager = (() => {
   const clearButton = document.querySelector('#clear-button');
   const taskList = document.querySelector('.task-list');
 
-  let currentProject = 'default';
+  let currentProject = 'main';
 
   const priorityColors = (element) => {
     if (element.priority === 1) {
@@ -171,8 +171,8 @@ const domManager = (() => {
         currentProject = el.textContent;
         cleanTasks();
         renderProjectTasks(currentProject);
-        document.querySelector('.currproj').classList.remove('currproj');
-        el.classList.add('currproj');
+        document.querySelector('.current‐project').classList.remove('current‐project')
+        el.classList.add('current‐project');
       });
     });
   };
@@ -188,6 +188,9 @@ const domManager = (() => {
       projectEl.textContent = el;
       if (el === 'default') {
         projectEl.classList.add('currproj');
+      }
+      if(el === currentProject){
+        projectEl.classList.add('current‐project');
       }
       projectsCont.appendChild(projectEl);
       activateProjectbuttons();
