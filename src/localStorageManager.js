@@ -97,7 +97,6 @@ const localStorageManager = (() => {
     deleteTask,
     CheckTask,
     allProjects,
-    editTitle,
     editDate,
   };
 })();
