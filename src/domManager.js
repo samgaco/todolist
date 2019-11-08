@@ -65,7 +65,6 @@ const domManager = (() => {
   };
 
 
-
   const renderTask = (element) => {
     if (element.trash === false) {
       document.querySelector('.task-list').insertAdjacentHTML('beforeend', `
