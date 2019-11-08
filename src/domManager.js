@@ -182,7 +182,7 @@ const domManager = (() => {
 
     clearButton.addEventListener('click', () => {
       cleanTasks();
-      localStorageManager.projectList.clear();
+      localStorageManager.projectList.removeItem(currentProject);
       renderAllProjects();
     });
 
