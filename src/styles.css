@@ -130,6 +130,8 @@ body {
   border: 1px solid rgb(109, 109, 109);
   border-bottom-right-radius: 60px 5px;
   background: #5ef109;
+
+
 }
 
 .task-title {
@@ -174,6 +176,8 @@ body {
 .task-inside {
   display: flex;
   flex-direction: column;
+  display: inline-block;
+  word-break: break-all;
 }
 
 .due-date {
