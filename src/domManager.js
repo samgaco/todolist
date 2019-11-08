@@ -38,6 +38,7 @@ const domManager = (() => {
         <div class="task-row">
         <i class="fas fa-fire-alt priority" id=check${element.id}></i>
         <div class="task-inside">
+         <p id=open-title${element.id} class="task-title">${element.title}</p> <br>
           <p id=open-edit${element.id} class="task-description">${element.description}</p> <br>
           <input id=edit${element.id} class="textarea edit-task" type="text" placeholder="${element.description}"> <br>
           <p class="due-date"> Due date: ${element.duedate} </p>
@@ -207,7 +208,7 @@ const domManager = (() => {
         const newDate = new Date(document.getElementById('myDate').value);
 
         const dueDate = `${newDate.getDate().toString()}-${(newDate.getMonth() + 1).toString()}-${newDate.getFullYear().toString()}`;
-        const taskObj = toDo.createTodo(document.querySelector('#input-task').value, priorityValue, dueDate);
+        const taskObj = toDo.createTodo(document.querySelector('#title-task').value, document.querySelector('#input-task').value, priorityValue, dueDate);
         localStorageManager.addTaskList(currentProject, taskObj);
 
 

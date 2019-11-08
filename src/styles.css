@@ -107,7 +107,7 @@ body {
   list-style-type: none;
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .li-task {

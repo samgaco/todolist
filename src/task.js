@@ -2,8 +2,8 @@
 /* eslint no-unused-vars: [1, {"argsIgnorePattern": "evt"}] */
 
 const ToDo = (() => {
-  const createTodo = (description, priority = 0, duedate, trash = false) => ({
-    description, priority, duedate, trash,
+  const createTodo = (title, description, priority = 0, duedate, trash = false) => ({
+    title, description, priority, duedate, trash,
   });
   return { createTodo };
 })();
