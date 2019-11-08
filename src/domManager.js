@@ -21,6 +21,16 @@ const domManager = (() => {
     }
   };
 
+  const openeditButtonActivate = (id) => {
+    document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
+      document.getElementById(`open-edit${id}`).style.display = 'none';
+      document.getElementById(`edit${id}`).style.display = 'block';
+
+
+      editInputActivate(id);
+    });
+  };
+
   const renderTask = (element) => {
     if (element.trash === false) {
       document.querySelector('.task-list').insertAdjacentHTML('beforeend', `
@@ -44,6 +54,17 @@ const domManager = (() => {
     taskList.innerHTML = '';
   };
 
+  const renderProjectTasks = (projectName) => {
+    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
+      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
+        renderTask(element);
+        renderProjectDelete(projectName);
+        renderProjectPriority(projectName);
+        renderProjectEdit(projectName);
+      });
+    }
+  };
+
   const deletebuttonActivate = (id, projectName) => {
     if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
       document.getElementById(`${id}`).addEventListener('click', (evt) => {
@@ -65,13 +86,6 @@ const domManager = (() => {
     }
   };
 
-  document.querySelector('#input-task').addEventListener('keypress', (e) => {
-    const key = e.which || e.keyCode;
-    if (key === 13) {
-
-    }
-  });
-
   const editInputActivate = (id) => {
     document.getElementById(`edit${id}`).addEventListener('keypress', (e) => {
       const key = e.which || e.keyCode;
@@ -82,16 +96,6 @@ const domManager = (() => {
         document.getElementById(`edit${id}`).style.display = 'none';
         document.getElementById(`open-edit${id}`).style.display = 'block';
       }
-    });
-  };
-
-  const openeditButtonActivate = (id) => {
-    document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
-      document.getElementById(`open-edit${id}`).style.display = 'none';
-      document.getElementById(`edit${id}`).style.display = 'block';
-
-
-      editInputActivate(id);
     });
   };
 
@@ -128,19 +132,6 @@ const domManager = (() => {
         }
       });
     }
-  };
-
-  const renderProjectTasks = (projectName) => {
-
-    if (JSON.parse(localStorageManager.projectList.getItem(projectName)) !== null) {
-      JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
-        renderTask(element);
-        renderProjectDelete(projectName);
-        renderProjectPriority(projectName);
-        renderProjectEdit(projectName);
-      });
-    }
-    
   };
 
   const renderLastProjectTask = (projectName) => {
