@@ -5,7 +5,7 @@ const localStorageManager = (() => {
   const projectList = window.localStorage;
 
   if (projectList.length === 0) {
-    projectList.setItem('main', JSON.stringify([]));
+    projectList.setItem('default', JSON.stringify([]));
   }
 
   const addProjects = (name) => {

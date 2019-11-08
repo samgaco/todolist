@@ -9,7 +9,7 @@ const domManager = (() => {
   const clearButton = document.querySelector('#clear-button');
   const taskList = document.querySelector('.task-list');
 
-  let currentProject = 'main';
+  let currentProject = 'default';
 
   const priorityColors = (element) => {
     if (element.priority === 1) {
@@ -164,7 +164,7 @@ const domManager = (() => {
       const projectEl = document.createElement('div');
       projectEl.classList.add('project');
       projectEl.textContent = el;
-      if (el === 'main') {
+      if (el === 'default') {
         projectEl.classList.add('currproj');
       }
       projectsCont.appendChild(projectEl);
