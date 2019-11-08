@@ -34,6 +34,19 @@ const domManager = (() => {
     });
   };
 
+  const ediTitleActivate = (id) => {
+    document.getElementById(`edit-title${id}`).addEventListener('keypress', (e) => {
+      const key = e.which || e.keyCode;
+      if (key === 13) {
+        localStorageManager.editTitle(currentProject, id, document.getElementById(`edit-title${id}`).value);
+
+        document.getElementById(`open-title${id}`).innerHTML = document.getElementById(`edit-title${id}`).value;
+        document.getElementById(`edit-title${id}`).style.display = 'none';
+        document.getElementById(`open-title${id}`).style.display = 'block';
+      }
+    });
+  };
+
 
   const openeditButtonActivate = (id) => {
     document.getElementById(`open-edit${id}`).addEventListener('click', (evt) => {
@@ -42,6 +55,15 @@ const domManager = (() => {
       editInputActivate(id);
     });
   };
+
+  const openeditTitleActivate = (id) => {
+    document.getElementById(`open-title${id}`).addEventListener('click', (evt) => {
+      document.getElementById(`open-title${id}`).style.display = 'none';
+      document.getElementById(`edit-title${id}`).style.display = 'block';
+      ediTitleActivate(id);
+    });
+  };
+
 
 
   const renderTask = (element) => {
@@ -52,6 +74,7 @@ const domManager = (() => {
         <i class="fas fa-fire-alt priority" id=check${element.id}></i>
         <div class="task-inside">
          <p id=open-title${element.id} class="task-title">${element.title}</p> <br>
+         <input id=edit-title${element.id} class="textarea edit-task" type="text" placeholder="${element.title}"> <br>
           <p id=open-edit${element.id} class="task-description">${element.description}</p> <br>
           <input id=edit${element.id} class="textarea edit-task" type="text" placeholder="${element.description}"> <br>
           <p class="due-date"> Due date: ${element.duedate} </p>
@@ -61,6 +84,7 @@ const domManager = (() => {
         </li>`);
       priorityColors(element);
       openeditButtonActivate(element.id);
+      openeditTitleActivate(element.id);
     }
   };
 
@@ -73,6 +97,7 @@ const domManager = (() => {
       JSON.parse(localStorageManager.projectList.getItem(projectName)).forEach((element) => {
         if (document.getElementById(`open-edit${element.id}`) !== null) {
           openeditButtonActivate(element.id, projectName);
+          openeditTitleActivate(element.id, projectName);
         }
       });
     }
